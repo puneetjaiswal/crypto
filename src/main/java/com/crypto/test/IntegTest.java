@@ -14,6 +14,8 @@ public class IntegTest {
         String plainPassword = "password";
 
         // Generate a secret key.
+        // You need to save this in your code or a vault, use this key to encrypt/decrypt your password
+        // Losing this key means you lose the password.
         String secretKey = Base64.encodeBase64String(instance.aesCipher.generateSecretKey().getEncoded());
         System.out.println("secret key ---> " + secretKey);
 
