@@ -16,16 +16,16 @@ import org.apache.commons.codec.binary.Base64;
 public class SHA256WithRSA extends SignatureAlgorithmBase{
 
 	public static final String SIGNATURE_ALGORITHM="SHA256WithRSA";
-	
+
 	@Override
 	public String getSignatureAlgorithmId()
 	{
 		return SIGNATURE_ALGORITHM;
 	}
-	
+
 	/**
 	 * Generates signature string out of a map of parameters using a given private key
-	 * @param headersToSign
+	 * @param parametersToSign
 	 * @param privateKey
 	 * @return returns signedInfo containing list of signed parameter names and signature value
 	 * calculated on that list
@@ -38,7 +38,7 @@ public class SHA256WithRSA extends SignatureAlgorithmBase{
 		Signature signatureInstance=getSignatureAlgorithm();
 		SignedInfo signedInfo=new SignedInfo();
 		signedInfo.setSignedParameters(intermediateSignedInfo[0]);
-		
+
 		ServiceKeyRep keyRep=new ServiceKeyRep(KeyRep.Type.PRIVATE, privateKey.getPrivateKeyAlgoName(), privateKey.getPrivateKeyEncodingFormat(), privateKey.getEncoded());
 		try{
 			PrivateKey resolvedPrivateKey=(PrivateKey)keyRep.readResolve();
@@ -83,11 +83,11 @@ public class SHA256WithRSA extends SignatureAlgorithmBase{
 		}
 		return verificationResult;
 	}
-	
+
 	/**
 	 * Verifies signature for a given map of parameter name value pairs
 	 * @param signedParameters map of parameter names and their plain text values
-	 * @param signedInfo contains signature value and list of parameter names on which signature has been calculated
+	 * @param signatureVal contains signature value and list of parameter names on which signature has been calculated
 	 * @param publicKey public key belonging to the service
 	 */
 	@Override
